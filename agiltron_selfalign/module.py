@@ -30,10 +30,7 @@ def check_port(fiber_port: int, number_of_ports: int) -> bool:
 
 class AgiltronSelfAlign:
     def __init__(
-        self,
-        resource_name: str,
-        timeout: Optional[int] = 2,
-        number_of_ports: Optional[int] = 16,
+        self, resource_name: str, timeout: int = 2, number_of_ports: int = 16,
     ):
         self.rm = pyvisa.ResourceManager()
         self.instrument = self.rm.open_resource(
