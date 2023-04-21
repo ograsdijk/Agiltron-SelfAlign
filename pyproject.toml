@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "agiltron-selfalign"
+version = "0.1.0"
+description = "Python interface for the Agiltron SelfAlign fiber switch"
+authors = ["ograsdijk <o.grasdijk@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "agiltron_selfalign"}]
+
+[tool.poetry.dependencies]
+python = ">=3.8"
+PyVISA = "^1.13.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.12.0"
+flake8 = "^6.0.0"
+isort = "^5.11.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
