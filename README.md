@@ -14,7 +14,7 @@ resource_name = "COM8"
 switch = AgiltronSelfAlign(resource_name, number_of_ports = 16)
 
 # change port to port 14
-switch.set_port(14)
+switch.set_fiber_port(14)
 
 # home switch to port 1
 switch.home()
