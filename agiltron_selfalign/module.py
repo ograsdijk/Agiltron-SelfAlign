@@ -1,7 +1,8 @@
-from typing import Optional
+from typing import Optional, cast
 
 import pyvisa
 from pyvisa.constants import Parity
+from pyvisa.resources import SerialInstrument
 
 
 def check_port(fiber_port: int, number_of_ports: int) -> bool:
@@ -30,19 +31,25 @@ def check_port(fiber_port: int, number_of_ports: int) -> bool:
 
 class AgiltronSelfAlign:
     def __init__(
-        self, resource_name: str, timeout: int = 2, number_of_ports: int = 16,
+        self,
+        resource_name: str,
+        timeout: int = 2,
+        number_of_ports: int = 16,
     ):
         self.rm = pyvisa.ResourceManager()
-        self.instrument = self.rm.open_resource(
-            resource_name=resource_name,
-            timeout=timeout,
-            parity=Parity.none,
-            data_bits=8,
-            baud_rate=9600,
-            write_termination="\r\n",
-            read_termination="\r\n",
+        self.instrument = cast(
+            SerialInstrument,
+            self.rm.open_resource(
+                resource_name=resource_name,
+                timeout=timeout,
+                parity=Parity.none,
+                data_bits=8,
+                baud_rate=9600,
+                write_termination="\r\n",
+                read_termination="\r\n",
+            ),
         )
-        self.number_of_ports: int = number_of_ports
+        self.number_of_ports = number_of_ports
         self.fiber_port: Optional[int] = None
 
     def set_fiber_port(self, fiber_port: int) -> None:
@@ -66,4 +73,4 @@ class AgiltronSelfAlign:
         """
         Home the fiber switch, i.e. move to port 1.
         """
-        self.instrument.write(b"\x01\x30\x00\x00")
+        self.instrument.write_raw(b"\x01\x30\x00\x00")
