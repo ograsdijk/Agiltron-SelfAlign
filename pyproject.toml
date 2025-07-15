@@ -5,6 +5,7 @@ description = "Python interface for the Agiltron SelfAlign fiber switch"
 authors = ["ograsdijk <o.grasdijk@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+repository = "https://github.com/ograsdijk/Agiltron-SelfAlign"
 packages = [{include = "agiltron_selfalign"}]
 
 [tool.poetry.dependencies]
